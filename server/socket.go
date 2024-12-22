@@ -26,7 +26,7 @@ func HandleSocket(w http.ResponseWriter, r *http.Request) {
 
 	log.Printf("New WebSocket connection established with session ID: %s", sessionId)
 
-	err = conn.WriteMessage(websocket.TextMessage, []byte(fmt.Sprintf("Session Id: %s", sessionId)))
+	err = conn.WriteMessage(websocket.TextMessage, []byte(fmt.Sprintf("%s", sessionId)))
 	if err != nil {
 		log.Println("Error sending session ID:", err)
 		return
