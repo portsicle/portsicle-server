@@ -1,4 +1,4 @@
-package main
+package server
 
 import (
 	"encoding/json"
@@ -10,7 +10,7 @@ import (
 	"github.com/gorilla/websocket"
 )
 
-func handleGET(w http.ResponseWriter, r *http.Request) {
+func HandleGET(w http.ResponseWriter, r *http.Request) {
 	sessionId := r.URL.Path[len("/"):]
 
 	mu.Lock()
@@ -44,19 +44,18 @@ func handleGET(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Wait for response msg from client
+	// Waiting for response msg from client
 	select {
 	case response := <-responseChan:
-		// Copy response headers
+
 		for key, values := range response.Response.Headers {
 			for _, value := range values {
 				w.Header().Add(key, value)
 			}
 		}
-		// Set status code
-		w.WriteHeader(response.Response.StatusCode)
-		// Write body
-		fmt.Fprint(w, response.Response.Body)
+
+		w.WriteHeader(response.Response.StatusCode) // Write header
+		fmt.Fprint(w, response.Response.Body)       // Write body
 	case <-r.Context().Done():
 		http.Error(w, "Request timeout", http.StatusGatewayTimeout)
 		return

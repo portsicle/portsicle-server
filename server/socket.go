@@ -1,4 +1,4 @@
-package main
+package server
 
 import (
 	"encoding/json"
@@ -10,7 +10,7 @@ import (
 	"github.com/gorilla/websocket"
 )
 
-func handleSocket(w http.ResponseWriter, r *http.Request) {
+func HandleSocket(w http.ResponseWriter, r *http.Request) {
 	conn, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		log.Printf("Error upgrading to ws: %v", err)
@@ -49,7 +49,7 @@ func handleSocket(w http.ResponseWriter, r *http.Request) {
 			break
 		}
 
-		// Handle response from client
+		// response from client
 		var message Message
 		if err := json.Unmarshal(msg, &message); err != nil {
 			log.Printf("Error unmarshaling message: %v", err)
