@@ -46,7 +46,16 @@ func HandleGET(w http.ResponseWriter, r *http.Request) {
 
 	// Waiting for response msg from client
 	select {
-	case response := <-responseChan:
+	case response, ok := <-responseChan:
+		if !ok {
+			http.Error(w, "Connection closed", http.StatusServiceUnavailable)
+			return
+		}
+
+		if response == nil || response.Response == nil {
+			http.Error(w, "Invalid response received", http.StatusInternalServerError)
+			return
+		}
 
 		for key, values := range response.Response.Headers {
 			for _, value := range values {

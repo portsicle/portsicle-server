@@ -33,7 +33,7 @@ func HandleSocket(w http.ResponseWriter, r *http.Request) {
 	}
 
 	for {
-		messageType, msg, err := conn.ReadMessage()
+		_, msg, err := conn.ReadMessage()
 		if err != nil {
 			if websocket.IsCloseError(err, websocket.CloseNormalClosure, websocket.CloseGoingAway) {
 				log.Printf("Client closed connection for session ID: %s", sessionId)
@@ -64,6 +64,5 @@ func HandleSocket(w http.ResponseWriter, r *http.Request) {
 			mu.Unlock()
 		}
 
-		log.Printf("Message type: %d from session %s: %s", messageType, sessionId, msg)
 	}
 }
