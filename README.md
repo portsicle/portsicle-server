@@ -10,7 +10,7 @@
 
 ## Usage
 
-#### Refer the guide provided on <a href="github.com/portsicle/portsicle-client">Portsicle client</a>.
+#### Refer the guide provided on [Portsicle client](https://github.com/portsicle/portsicle-client).
 
 ## How Portsicle Works
 
