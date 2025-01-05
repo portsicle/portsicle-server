@@ -1,8 +1,8 @@
-## Portsicle
+## Portsicle Server
 
 - Portsicle is a free and open-source Ngrok alternative to expose local servers online.
 
-- <a href="github.com/portsicle/portsicle-client">Portsicle client</a> allows you to use the Portsicle Server via CLI.
+- [Portsicle client](https://github.com/portsicle/portsicle-client) allows you to use the Portsicle Server via CLI.
 
 - When a client connects to the portsicle server, it gets a unique public url in response.
 
@@ -10,7 +10,7 @@
 
 ## Usage
 
-#### Refer the guide provided on [Portsicle client](https://github.com/portsicle/portsicle-client).
+#### Refer the guide provided on [Portsicle client](https://github.com/portsicle/portsicle-client?tab=readme-ov-file#guide).
 
 ## How Portsicle Works
 
@@ -20,7 +20,7 @@
 
 2. Upon receiving the message, the client converts it back into an HTTP request and sends it to the local server.
 
-![image](https://github.com/user-attachments/assets/96581c84-7583-42a7-b965-3f7bcae9edaa)
+![request cycle](https://github.com/user-attachments/assets/96581c84-7583-42a7-b965-3f7bcae9edaa)
 
 ### Response Cycle:
 
@@ -28,4 +28,4 @@
 
 2. Upon receiving the message, the server converts it back into an HTTP response and forwards it to the public endpoint.
 
-![image](https://github.com/user-attachments/assets/8c77844e-144a-472c-af29-051e5f302e06)
+![response cycle](https://github.com/user-attachments/assets/8c77844e-144a-472c-af29-051e5f302e06)
