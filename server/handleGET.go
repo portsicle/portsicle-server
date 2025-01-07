@@ -124,7 +124,7 @@ func HandleGET(w http.ResponseWriter, r *http.Request) {
 	}
 
 	mu.Lock()
-	conn, exists := clients[sessionId]
+	clientConn, exists := clients[sessionId]
 	responseChan, responseExists := responses[sessionId]
 	mu.Unlock()
 
@@ -134,7 +134,7 @@ func HandleGET(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// send this request message to the client
-	err = conn.WriteMessage(websocket.TextMessage, messageBytes)
+	err = clientConn.writeMessage(websocket.TextMessage, messageBytes)
 	if err != nil {
 		http.Error(w, "Error sending message to WebSocket", http.StatusInternalServerError)
 		log.Printf("Error sending message to session %s: %v", sessionId, err)

@@ -18,16 +18,17 @@ func HandleSocket(w http.ResponseWriter, r *http.Request) {
 	}
 
 	sessionId := uuid.New().String()
+	clientConn := &clientConnection{conn: conn}
 
 	mu.Lock()
-	clients[sessionId] = conn
+	clients[sessionId] = clientConn
 	responses[sessionId] = make(chan *Message)
 	mu.Unlock()
 
 	log.Printf("New client connection established with session ID: %s", sessionId)
 
 	// the very first message client will receive from server is the sessionId
-	err = conn.WriteMessage(websocket.TextMessage, []byte(fmt.Sprintf("%s", sessionId)))
+	err = clientConn.writeMessage(websocket.TextMessage, []byte(fmt.Sprintf("%s", sessionId)))
 	if err != nil {
 		log.Println("Error sending session ID:", err)
 		return
