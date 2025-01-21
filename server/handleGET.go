@@ -1,7 +1,6 @@
 package server
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 	"log"
@@ -10,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/gorilla/websocket"
+	"github.com/shamaton/msgpack/v2"
 )
 
 func HandleGET(w http.ResponseWriter, r *http.Request) {
@@ -117,7 +117,7 @@ func HandleGET(w http.ResponseWriter, r *http.Request) {
 	*/
 
 	// json encoding of the raw message
-	messageBytes, err := json.Marshal(message)
+	messageBytes, err := msgpack.Marshal(message)
 	if err != nil {
 		http.Error(w, "Error crafting message", http.StatusInternalServerError)
 		return

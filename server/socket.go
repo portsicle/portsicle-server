@@ -1,13 +1,13 @@
 package server
 
 import (
-	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
 
 	"github.com/google/uuid"
 	"github.com/gorilla/websocket"
+	"github.com/shamaton/msgpack/v2"
 )
 
 func HandleSocket(w http.ResponseWriter, r *http.Request) {
@@ -60,7 +60,7 @@ func HandleSocket(w http.ResponseWriter, r *http.Request) {
 
 		// decoding response from client
 		var message Message
-		if err := json.Unmarshal(msg, &message); err != nil {
+		if err := msgpack.Unmarshal(msg, &message); err != nil {
 			log.Printf("Error unmarshaling message: %v", err)
 			continue
 		}
