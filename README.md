@@ -1,6 +1,6 @@
 ## Portsicle Server
 
-- Portsicle is a free and open-source Ngrok alternative to expose local servers online.
+- Portsicle is a free and open-source platform to expose local servers online.
 
 - [Portsicle client](https://github.com/portsicle/portsicle-client) allows you to use the Portsicle Server via CLI.
 
