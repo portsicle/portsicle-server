@@ -44,9 +44,8 @@ func HandleSocket(w http.ResponseWriter, r *http.Request) {
 		*/
 
 		_, msg, err := conn.ReadMessage()
-		log.Print("received compressed body: ", len(msg), " bytes")
 		msg = lz4decompress(msg)
-		log.Print("after uncompression: ", len(msg), " bytes")
+
 		if err != nil {
 			if websocket.IsCloseError(err, websocket.CloseNormalClosure, websocket.CloseGoingAway) {
 				log.Printf("Client closed connection for session ID: %s", b64SessionId)
