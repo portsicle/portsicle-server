@@ -44,7 +44,6 @@ func HandleSocket(w http.ResponseWriter, r *http.Request) {
 		*/
 
 		_, msg, err := conn.ReadMessage()
-		msg = lz4decompress(msg)
 
 		if err != nil {
 			if websocket.IsCloseError(err, websocket.CloseNormalClosure, websocket.CloseGoingAway) {
